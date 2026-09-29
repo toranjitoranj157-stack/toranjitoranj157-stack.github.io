@@ -3,20 +3,247 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>فروشیار</title>
+  <title>فروش‌یار | سیستم هوشمند فروش</title>
   <style>
-    body { font-family: Tahoma, sans-serif; text-align: center; padding: 60px 20px; background: #f0f4f8; margin: 0; }
-    .card { background: white; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-    h1 { color: #1a56db; font-size: 28px; }
-    p { color: #555; font-size: 16px; line-height: 1.6; }
-    .btn { display: inline-block; margin-top: 20px; padding: 12px 30px; background: #1a56db; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      padding-bottom: 50px;
+    }
+    header {
+      background-color: #ffffff;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      color: #4f46e5;
+    }
+    .cart-status {
+      background-color: #e0e7ff;
+      color: #3730a3;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .hero {
+      text-align: center;
+      padding: 40px 16px 20px;
+    }
+    .hero h1 {
+      font-size: 26px;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+    .hero p {
+      color: #64748b;
+      font-size: 15px;
+    }
+    .products-container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-img {
+      width: 100%;
+      height: 180px;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+    .card-body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .price {
+      font-size: 17px;
+      font-weight: bold;
+      color: #059669;
+    }
+    .btn-buy {
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+    }
+    .order-box {
+      max-width: 900px;
+      margin: 30px auto;
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+    }
+    .order-box h3 {
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+    .order-btn {
+      background-color: #10b981;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>👋 به فروشیار خوش آمدید</h1>
-    <p>وب‌سایت رسمی فروشیار در حال آماده‌سازی است.</p>
-    <a class="btn" href="#">بزودی...</a>
+
+  <header>
+    <div class="logo">فروش‌یار 🛍️</div>
+    <div class="cart-status" id="cartDisplay">سبد خرید: ۰ تومان (۰ کالا)</div>
+  </header>
+
+  <div class="hero">
+    <h1>ویترین محصولات منتخب</h1>
+    <p>سامانه سفارش آنلاین و هوشمند فروش‌یار</p>
   </div>
+
+  <div class="products-container">
+
+    <div class="card">
+      <div class="card-img">👗</div>
+      <div class="card-body">
+        <div>
+          <div class="card-title">مانتو بهاره طرح ترنج</div>
+          <div class="card-desc">پارچه لینن درجه یک، گل‌دوزی دستی ظریف، مناسب فصل.</div>
+        </div>
+        <div>
+          <div class="price-row">
+            <span class="price">۶۸۰,۰۰۰ تومان</span>
+          </div>
+          <button class="btn-buy" onclick="addToCart(680000, 'مانتو بهاره')">افزودن به سبد خرید +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img">🧥</div>
+      <div class="card-body">
+        <div>
+          <div class="card-title">کت کژوال شیک</div>
+          <div class="card-desc">دوخت بسیار تمیز، تن‌خور آزاد و راحت برای روزمره و مهمانی.</div>
+        </div>
+        <div>
+          <div class="price-row">
+            <span class="price">۸۹۰,۰۰۰ تومان</span>
+          </div>
+          <button class="btn-buy" onclick="addToCart(890000, 'کت کژوال')">افزودن به سبد خرید +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img">🧣</div>
+      <div class="card-body">
+        <div>
+          <div class="card-title">شال نخی دست‌دوز</div>
+          <div class="card-desc">طراحی اختصاصی با رنگ‌های طبیعی و لطافت بالا.</div>
+        </div>
+        <div>
+          <div class="price-row">
+            <span class="price">۲۵۰,۰۰۰ تومان</span>
+          </div>
+          <button class="btn-buy" onclick="addToCart(250000, 'شال نخی')">افزودن به سبد خرید +</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="order-box">
+    <h3>خلاصه فاکتور و ثبت سفارش</h3>
+    <p id="summaryText">هنوز محصولی انتخاب نکرده‌اید.</p>
+    <button class="order-btn" onclick="submitOrder()">تکمیل خرید و پرداخت</button>
+  </div>
+
+  <script>
+    let totalPrice = 0;
+    let totalItems = 0;
+
+    function addToCart(price, title) {
+      totalPrice += price;
+      totalItems += 1;
+      updateDisplay();
+      alert(`«${title}» با موفقیت به سبد خرید اضافه شد!`);
+    }
+
+    function updateDisplay() {
+      document.getElementById('cartDisplay').innerText = `سبد خرید: ${totalPrice.toLocaleString('fa-IR')} تومان (${totalItems} کالا)`;
+      if (totalItems > 0) {
+        document.getElementById('summaryText').innerText = `تعداد اقلام: ${totalItems} عدد | جمع کل قابل پرداخت: ${totalPrice.toLocaleString('fa-IR')} تومان`;
+      } else {
+        document.getElementById('summaryText').innerText = 'هنوز محصولی انتخاب نکرده‌اید.';
+      }
+    }
+
+    function submitOrder() {
+      if (totalItems === 0) {
+        alert('لطفاً ابتدا حداقل یک محصول به سبد خرید اضافه کنید.');
+      } else {
+        alert(`سفارش شما با مبلغ کل ${totalPrice.toLocaleString('fa-IR')} تومان ثبت شد. در حال انتقال...`);
+      }
+    }
+  </script>
+
 </body>
 </html>
