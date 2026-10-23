@@ -1,1 +1,392 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشیار | سامانه جامع مقایسه قیمت و خرید لباس</title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --accent: #ec4899;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --whatsapp: #25d366;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Tahoma, sans-serif;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .search-filter-box {
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-top: -1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .search-box input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+        .search-box input:focus {
+            border-color: var(--primary);
+        }
+        .categories {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+        .cat-btn {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text);
+            transition: all 0.2s;
+        }
+        .cat-btn.active, .cat-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .filters-sort {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        select {
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: white;
+            cursor: pointer;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+        }
+        .product-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+        .product-body {
+            padding: 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .sellers-list {
+            margin-top: auto;
+            border-top: 1px solid var(--border);
+            padding-top: 0.75rem;
+        }
+        .seller-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .seller-name {
+            font-weight: 500;
+        }
+        .seller-price {
+            color: #d97706;
+            font-weight: bold;
+        }
+        .whatsapp-btn {
+            background: var(--whatsapp);
+            color: white;
+            border: none;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            text-decoration: none;
+        }
+        .whatsapp-btn:hover {
+            opacity: 0.9;
+        }
+        .badge-vip {
+            background: #fef3c7;
+            color: #d97706;
+            font-size: 0.7rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            margin-right: 0.3rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+        .support-box {
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>فروشیار</h1>
+        <p>سامانه جامع مقایسه قیمت و خرید مستقیم لباس از معتبرترین مزون‌ها</p>
+    </header>
+
+    <div class="container">
+        <div class="search-filter-box">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="جستجوی مانتو، شومیز، کت، شلوار و..." oninput="filterProducts()">
+            </div>
+            <div class="categories">
+                <button class="cat-btn active" onclick="setCategory('all', this)">همه محصولات</button>
+                <button class="cat-btn" onclick="setCategory('manteau', this)">مانتو</button>
+                <button class="cat-btn" onclick="setCategory('coat', this)">کت تک</button>
+                <button class="cat-btn" onclick="setCategory('shomiz', this)">شومیز</button>
+                <button class="cat-btn" onclick="setCategory('pants', this)">شلوار</button>
+                <button class="cat-btn" onclick="setCategory('set', this)">ست کامل</button>
+            </div>
+            <div class="filters-sort">
+                <span id="resultCount">نمایش ۶ محصول</span>
+                <div>
+                    <label for="sortSelect">مرتب‌سازی:</label>
+                    <select id="sortSelect" onchange="filterProducts()">
+                        <option value="default">پیش‌فرض</option>
+                        <option value="cheap">ارزان‌ترین</option>
+                        <option value="expensive">گران‌ترین</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="products-grid" id="productsContainer">
+            <!-- محصولات با جاوااسکریپت بارگذاری می‌شوند -->
+        </div>
+
+        <div class="support-box">
+            <i class="fa fa-phone"></i> پشتیبانی و ثبت نام مزون‌ها: <strong>09378209074</strong>
+        </div>
+    </div>
+
+    <footer>
+        <p>© ۱۴۰۵ فروشیار - تمامی حقوق محفوظ است.</p>
+    </footer>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                title: "مانتو کتی مدل بهاره شیک",
+                category: "manteau",
+                image: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?w=500&auto=format&fit=crop&q=60",
+                sellers: [
+                    { name: "مزون ترنج (اختصاصی)", price: 1250000, phone: "989378209074", vip: true },
+                    { name: "مزون الگانس", price: 1380000, phone: "989378209074", vip: false }
+                ]
+            },
+            {
+                id: 2,
+                title: "کت تک مجلسی طرح جدید",
+                category: "coat",
+                image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500&auto=format&fit=crop&q=60",
+                sellers: [
+                    { name: "مزون ترنج (اختصاصی)", price: 1650000, phone: "989378209074", vip: true },
+                    { name: "گالری آورا", price: 1750000, phone: "989378209074", vip: false }
+                ]
+            },
+            {
+                id: 3,
+                title: "شومیز حریر مجلسی طرح گل‌دار",
+                category: "shomiz",
+                image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&auto=format&fit=crop&q=60",
+                sellers: [
+                    { name: "مزون پارمیدا", price: 780000, phone: "989378209074", vip: false },
+                    { name: "مزون ترنج (اختصاصی)", price: 750000, phone: "989378209074", vip: true }
+                ]
+            },
+            {
+                id: 4,
+                title: "شلوار بوت‌کات پارچه‌ای مشکی",
+                category: "pants",
+                image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500&auto=format&fit=crop&q=60",
+                sellers: [
+                    { name: "مزون ترنج (اختصاصی)", price: 890000, phone: "989378209074", vip: true },
+                    { name: "تولیدی مرکزی", price: 850000, phone: "989378209074", vip: false }
+                ]
+            },
+            {
+                id: 5,
+                title: "ست کت و شلوار رسمی زنانه",
+                category: "set",
+                image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=500&auto=format&fit=crop&q=60",
+                sellers: [
+                    { name: "مزون ترنج (اختصاصی)", price: 2400000, phone: "989378209074", vip: true },
+                    { name: "خانه مد تهران", price: 2600000, phone: "989378209074", vip: false }
+                ]
+            },
+            {
+                id: 6,
+                title: "مانتو بلند تابستانه خنک",
+                category: "manteau",
+                image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&auto=format&fit=crop&q=60",
+                sellers: [
+                    { name: "مزون ترنج (اختصاصی)", price: 1100000, phone: "989378209074", vip: true }
+                ]
+            }
+        ];
+
+        let currentCategory = 'all';
+
+        function setCategory(cat, element) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            filterProducts();
+        }
+
+        function formatPrice(price) {
+            return price.toLocaleString('fa-IR') + ' تومان';
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const sortType = document.getElementById('sortSelect').value;
+
+            let filtered = products.filter(p => {
+                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchesQuery = p.title.toLowerCase().includes(query);
+                return matchesCat && matchesQuery;
+            });
+
+            // مرتب‌سازی بر اساس قیمت ارزان‌ترین فروشنده هر محصول
+            filtered.sort((a, b) => {
+                const minA = Math.min(...a.sellers.map(s => s.price));
+                const minB = Math.min(...b.sellers.map(s => s.price));
+                if (sortType === 'cheap') return minA - minB;
+                if (sortType === 'expensive') return minB - minA;
+                return 0;
+            });
+
+            renderProducts(filtered);
+        }
+
+        function renderProducts(list) {
+            const container = document.getElementById('productsContainer');
+            document.getElementById('resultCount').innerText = `نمایش ${list.length} محصول`;
+            
+            if (list.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #64748b;">محصولی یافت نشد.</p>';
+                return;
+            }
+
+            container.innerHTML = list.map(p => `
+                <div class="product-card">
+                    <img src="${p.image}" alt="${p.title}" class="product-img">
+                    <div class="product-body">
+                        <div class="product-title">${p.title}</div>
+                        <div class="sellers-list">
+                            ${p.sellers.map(s => `
+                                <div class="seller-row">
+                                    <span class="seller-name">
+                                        ${s.vip ? '<span class="badge-vip">ویژه</span>' : ''}${s.name}
+                                    </span>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <span class="seller-price">${formatPrice(s.price)}</span>
+                                        <a href="https://wa.me/${s.phone}?text=${encodeURIComponent('سلام، مایل به خرید محصول «' + p.title + '» با قیمت ' + formatPrice(s.price) + ' هستم.')}" target="_blank" class="whatsapp-btn">
+                                            <i class="fa fa-whatsapp"></i> خرید
+                                        </a>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // بارگذاری اولیه
+        filterProducts();
+    </script>
+</body>
+</html>
 
