@@ -1,4 +1,379 @@
-<!DOCTYPE<!DOCTYPE<!DOCTYPE html>
+<!DOCTYPE<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشیار و سازنده استایل | سامانه جامع لباس</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --accent: #ec4899;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --whatsapp: #25d366;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background: white;
+            padding: 12px;
+            gap: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* بخش فروشیار */
+        .search-box {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            outline: none;
+            margin-bottom: 20px;
+            background: white;
+        }
+
+        .search-box:focus {
+            border-color: var(--primary);
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .offer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .offer-row:last-child {
+            border-bottom: none;
+        }
+
+        .seller-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge-vip {
+            background: #fef3c7;
+            color: #d97706;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .btn-buy {
+            background: var(--whatsapp);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* بخش سازنده استایل و سفارش سفارشی */
+        .builder-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f8fafc;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 12px;
+        }
+
+        .color-circle {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: 0.2s;
+        }
+
+        .color-circle.selected {
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>فروشیار و سازنده استایل ترنج</h1>
+        <p>مقایسه قیمت مزون‌ها و طراحی سفارش اختصاصی لباس</p>
+    </header>
+
+    <!-- تب‌های بالای سایت -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('market', event)">🛍️ مقایسه قیمت (فروشیار)</button>
+        <button class="tab-btn" onclick="switchTab('builder', event)">✨ سازنده استایل و سفارش</button>
+    </div>
+
+    <div class="container">
+        <!-- بخش اول: مقایسه قیمت فروشیار -->
+        <div id="market" class="section active">
+            <input type="text" class="search-box" placeholder="جستجوی مانتو، کت، شومیز و..." oninput="filterProducts(this.value)">
+            
+            <div id="products-list">
+                <div class="product-card" data-name="مانتو کتی مدل بهاره شیک">
+                    <div class="product-title">مانتو کتی مدل بهاره شیک</div>
+                    <div class="offer-row">
+                        <div class="seller-info">
+                            <span>مزون ترنج (اختصاصی)</span>
+                            <span class="badge-vip">ویژه</span>
+                        </div>
+                        <div class="price">۱,۲۵۰,۰۰۰ تومان</div>
+                        <a href="https://wa.me/989378209074?text=سلام،قصد خرید مانتو کتی مدل بهاره شیک از مزون ترنج را دارم." class="btn-buy" target="_blank">خرید واتساپ</a>
+                    </div>
+                    <div class="offer-row">
+                        <div class="seller-info">
+                            <span>مزون الگانس</span>
+                        </div>
+                        <div class="price">۱,۳۸۰,۰۰۰ تومان</div>
+                        <a href="https://wa.me/989378209074?text=سلام،قصد خرید مانتو کتی مدل بهاره شیک از مزون الگانس را دارم." class="btn-buy" target="_blank">خرید واتساپ</a>
+                    </div>
+                </div>
+
+                <div class="product-card" data-name="ست کت و شلوار مجلسی">
+                    <div class="product-title">ست کت و شلوار مجلسی زنانه</div>
+                    <div class="offer-row">
+                        <div class="seller-info">
+                            <span>مزون ترنج (اختصاصی)</span>
+                            <span class="badge-vip">ویژه</span>
+                        </div>
+                        <div class="price">۲,۱۰۰,۰۰۰ تومان</div>
+                        <a href="https://wa.me/989378209074?text=سلام،قصد خرید ست کت و شلوار مجلسی از مزون ترنج را دارم." class="btn-buy" target="_blank">خرید واتساپ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش دوم: سازنده استایل و سفارش سفارشی -->
+        <div id="builder" class="section">
+            <div class="builder-card">
+                <h3 style="margin-bottom: 20px; color: var(--primary);">دستیار طراحی و سفارش دلخواه</h3>
+                
+                <div class="form-group">
+                    <label>نوع لباس مورد نظر:</label>
+                    <select id="itemType" class="form-control">
+                        <option value="مانتو کتی">مانتو کتی</option>
+                        <option value="شومیز مجلسی">شومیز مجلسی</option>
+                        <option value="ست کامل (کت و شلوار)">ست کامل (کت و شلوار)</option>
+                        <option value="شلوار بگ">شلوار بگ</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>سایز:</label>
+                    <select id="itemSize" class="form-control">
+                        <option value="۳۸">۳۸</option>
+                        <option value="۴۰">۴۰</option>
+                        <option value="۴۲">۴۲</option>
+                        <option value="۴۴">۴۴ و بالاتر</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>انتخاب رنگ دلخواه:</label>
+                    <div class="color-options">
+                        <div class="color-circle selected" style="background: #1e293b;" onclick="selectColor(this, 'مشکی')"></div>
+                        <div class="color-circle" style="background: #f8fafc; border: 1px solid #cbd5e1;" onclick="selectColor(this, 'سفید')"></div>
+                        <div class="color-circle" style="background: #3b82f6;" onclick="selectColor(this, 'آبی کاربنی')"></div>
+                        <div class="color-circle" style="background: #ec4899;" onclick="selectColor(this, 'صورتی/سرخابی')"></div>
+                        <div class="color-circle" style="background: #10b981;" onclick="selectColor(this, 'سبز تیره')"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>توضیحات و جزئیات تکمیلی (دلخواه):</label>
+                    <textarea id="itemNotes" class="form-control" rows="3" placeholder="مثلاً قد لباس یا جزئیات دوخت خاص..."></textarea>
+                </div>
+
+                <button class="btn-submit" onclick="sendCustomOrder()">ارسال سفارش سفارشی به واتساپ 📲</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedColorVal = 'مشکی';
+
+        function switchTab(tabId, event) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function selectColor(element, colorName) {
+            document.querySelectorAll('.color-circle').forEach(c => c.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedColorVal = colorName;
+        }
+
+        function filterProducts(query) {
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                if(name.toLowerCase().includes(query.toLowerCase())) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function sendCustomOrder() {
+            const type = document.getElementById('itemType').value;
+            const size = document.getElementById('itemSize').value;
+            const notes = document.getElementById('itemNotes').value;
+
+            const text = `سلام! درخواست سفارش سفارشی دارم:%0A- نوع: ${type}%0A- سایز: ${size}%0A- رنگ: ${selectedColorVal}%0A- توضیحات: ${notes}`;
+            window.open(`https://wa.me/989378209074?text=${text}`, '_blank');
+        }
+    </script>
+</body>
+</html>
+!DOCTYPE<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
